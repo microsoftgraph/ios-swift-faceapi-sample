@@ -39,7 +39,7 @@ extension Authentication {
                 .login(with: nil) { (error: Swift.Error?) in
                     
                     if let nsError = error {
-                        completion(.failure(Error.unexpectedError(nsError: nsError as NSError?)))
+                        completion(.failure(Error.UnexpectedError(nsError: nsError as NSError?)))
                     }
                     else {
                         completion(.success("" as AnyObject))

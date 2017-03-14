@@ -35,7 +35,7 @@ class FaceAPI: NSObject {
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
             
             if let nsError = error {
-                completion(.failure(Error.unexpectedError(nsError: nsError as NSError?)))
+                completion(.failure(Error.UnexpectedError(nsError: nsError as NSError?)))
             }
             else {
                 let httpResponse = response as! HTTPURLResponse
@@ -48,10 +48,10 @@ class FaceAPI: NSObject {
                 else {
                     do {
                         let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! JSONDictionary
-                        completion(.failure(Error.serviceError(json: json)))
+                        completion(.failure(Error.ServiceError(json: json)))
                     }
                     catch {
-                        completion(.failure(Error.jSonSerializationError))
+                        completion(.failure(Error.JSonSerializationError))
                     }
                 }
             }
@@ -81,7 +81,7 @@ class FaceAPI: NSObject {
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
             
             if let nsError = error {
-                completion(.failure(Error.unexpectedError(nsError: nsError as NSError?)))
+                completion(.failure(Error.UnexpectedError(nsError: nsError as NSError?)))
             }
             else {
                 let httpResponse = response as! HTTPURLResponse
@@ -94,7 +94,7 @@ class FaceAPI: NSObject {
                     }
                 }
                 catch {
-                    completion(.failure(Error.jSonSerializationError))
+                    completion(.failure(Error.JSonSerializationError))
                 }
             }
         }) 
@@ -117,7 +117,7 @@ class FaceAPI: NSObject {
         let task = URLSession.shared.uploadTask(with: request as URLRequest, from: pngRepresentation, completionHandler: { (data, response, error) in
             
             if let nsError = error {
-                completion(.failure(Error.unexpectedError(nsError: nsError as NSError?)))
+                completion(.failure(Error.UnexpectedError(nsError: nsError as NSError?)))
             }
             else {
                 let httpResponse = response as! HTTPURLResponse
@@ -130,7 +130,7 @@ class FaceAPI: NSObject {
                     }
                 }
                 catch {
-                    completion(.failure(Error.jSonSerializationError))
+                    completion(.failure(Error.JSonSerializationError))
                 }
             }
         }) 
@@ -151,7 +151,7 @@ class FaceAPI: NSObject {
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
             
             if let nsError = error {
-                completion(.failure(Error.unexpectedError(nsError: nsError as NSError?)))
+                completion(.failure(Error.UnexpectedError(nsError: nsError as NSError?)))
             }
             else {
                 let httpResponse = response as! HTTPURLResponse
@@ -163,11 +163,11 @@ class FaceAPI: NSObject {
                     }
                     else {
                         let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! JSONDictionary
-                        completion(.failure(Error.serviceError(json: json)))
+                        completion(.failure(Error.ServiceError(json: json)))
                     }
                 }
                 catch {
-                    completion(.failure(Error.jSonSerializationError))
+                    completion(.failure(Error.JSonSerializationError))
                 }
             }
         }) 
@@ -187,7 +187,7 @@ class FaceAPI: NSObject {
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
             
             if let nsError = error {
-                completion(.failure(Error.unexpectedError(nsError: nsError as NSError?)))
+                completion(.failure(Error.UnexpectedError(nsError: nsError as NSError?)))
             }
             else {
                 do {
@@ -195,7 +195,7 @@ class FaceAPI: NSObject {
                     completion(.success(json as AnyObject))
                 }
                 catch {
-                    completion(.failure(Error.jSonSerializationError))
+                    completion(.failure(Error.JSonSerializationError))
                 }
             }
         }) 
@@ -218,7 +218,7 @@ class FaceAPI: NSObject {
         let task = URLSession.shared.uploadTask(with: request as URLRequest, from: pngRepresentation, completionHandler: { (data, response, error) in
             
             if let nsError = error {
-                completion(.failure(Error.unexpectedError(nsError: nsError as NSError?)))
+                completion(.failure(Error.UnexpectedError(nsError: nsError as NSError?)))
             }
             else {
                 let httpResponse = response as! HTTPURLResponse
@@ -230,11 +230,11 @@ class FaceAPI: NSObject {
                         completion(.success(json as AnyObject))
                     }
                     else {
-                        completion(.failure(Error.serviceError(json: json as! [String : AnyObject])))
+                        completion(.failure(Error.ServiceError(json: json as! [String : AnyObject])))
                     }
                 }
                 catch {
-                    completion(.failure(Error.jSonSerializationError))
+                    completion(.failure(Error.JSonSerializationError))
                 }
             }
         }) 
@@ -265,7 +265,7 @@ class FaceAPI: NSObject {
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
             
             if let nsError = error {
-                completion(.failure(Error.unexpectedError(nsError: nsError as NSError?)))
+                completion(.failure(Error.UnexpectedError(nsError: nsError as NSError?)))
             }
             else {
                 let httpResponse = response as! HTTPURLResponse
@@ -277,11 +277,11 @@ class FaceAPI: NSObject {
                         completion(.success(json as AnyObject))
                     }
                     else {
-                        completion(.failure(Error.serviceError(json: json as! JSONDictionary)))
+                        completion(.failure(Error.ServiceError(json: json as! JSONDictionary)))
                     }
                 }
                 catch {
-                    completion(.failure(Error.jSonSerializationError))
+                    completion(.failure(Error.JSonSerializationError))
                 }
             }
         }) 

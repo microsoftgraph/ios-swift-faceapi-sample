@@ -22,7 +22,7 @@ struct Graph {
             (userCollection: MSCollection?, next: MSGraphUsersCollectionRequest?, error: Swift.Error?) in
             
             if let nsError = error {
-                completion(.failure(Error.unexpectedError(nsError: nsError as NSError? )as NSError))
+                completion(.failure(Error.UnexpectedError(nsError: nsError as NSError? )as NSError))
             }
             else {
                 if let users = userCollection {
@@ -40,12 +40,12 @@ struct Graph {
             (url: URL?, response: URLResponse?, error: Swift.Error?) in
             
             if let nsError = error {
-                completion(.failure( Error.unexpectedError(nsError: nsError as NSError?) as NSError))
+                completion(.failure( Error.UnexpectedError(nsError: nsError as NSError?) as NSError))
                 return
             }
             
             guard let picUrl = url else {
-                completion(.failure(Error.unexpectedError(nsError: nil) as NSError))
+                completion(.failure(Error.UnexpectedError(nsError: nil) as NSError))
                 return
             }
             
@@ -65,7 +65,7 @@ struct Graph {
                 completion(.success(validPic))
             }
             else {
-                completion(.failure(Error.unexpectedError(nsError: nil) as NSError))
+                completion(.failure(Error.UnexpectedError(nsError: nil) as NSError))
             }
             
         }
