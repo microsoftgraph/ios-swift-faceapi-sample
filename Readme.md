@@ -1,4 +1,4 @@
-#Microsoft Cognitive Services with Graph SDK Sample for iOS
+# Microsoft Cognitive Services with Graph SDK Sample for iOS
 
 This sample shows how to use both the [Microsoft Graph SDK for iOS](https://github.com/microsoftgraph/msgraph-sdk-ios) and the [Microsoft Cognitive Services Face API](https://www.microsoft.com/cognitive-services/en-us/face-api) in an iOS app. 
 The user can select a photo locally from the device or from a user profile stored in Microsoft Exchange or Outlook. The sample uses the Face API to detect and identify the person in the photo.
@@ -10,7 +10,7 @@ The sample code shows how to do the following:
 
 ![PhotoSelection](/readme-images/photoSelection.png) ![PhotoIdentification](/readme-images/photoIdentification.png)
 ## Prerequisites
-* [Xcode](https://developer.apple.com/xcode/downloads/) version 7.3.1 from Apple
+* [Xcode](https://developer.apple.com/xcode/downloads/) version 8.2.1 from Apple
 * Installation of [CocoaPods](https://guides.cocoapods.org/using/using-cocoapods.html)  as a dependency manager.
 * A Microsoft work account such as Office 365.  You can sign up for [an Office 365 Developer subscription](https://profile.microsoft.com/RegSysProfileCenter/wizardnp.aspx?wizid=14b845d0-938c-45af-b061-f798fbb4d170&lcid=1033) that includes the resources that you need to start building Office 365 apps.
 
@@ -20,7 +20,7 @@ The sample code shows how to do the following:
 
 * A subscription key for Cognitive Services. Check out services provided by [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services). Be sure to add a key for the Face API. You'll need to use that key value when you follow the steps in the **Running this sample in Xcode** section below.
 
->**Note:** The sample was tested on Xcode 7.3.1. This sample does not yet support Xcode 8 and iOS10, which uses the Swift 3.0 framework.
+>**Note:** The sample was tested on Xcode 8.2.1 and supports Xcode 8 and iOS10, which uses the Swift 3.0 framework.
 
 ## Running this sample in Xcode
 
@@ -46,30 +46,40 @@ For this sample, scopes for Graph have been pre-defined for you.
    ```
 5. Run the sample. You'll be asked to connect/authenticate to a work account and you'll need to provide your Office 365 credentials. Once authenticated you'll be taken to the photo selector controller to select a person to identify and a photo to identify from. 
 
-##Code of Interest
+## Code of Interest
 
 #### Graph
 This sample contains two Microsoft Graph calls, both of which are in **Graph.swift** file under /Graph.
 
 1. Get user's directory
    ```swift
-    func getUsers(with completion: (result: GraphResult<[MSGraphUser], Error>) -> Void) {
+    // Read contacts
+    func getUsers(with completion: @escaping (_ result: GraphResult<[MSGraphUser], NSError>) -> Void) {
         graphClient.users().request().getWithCompletion {
-            (userCollection: MSCollection?, next: MSGraphUsersCollectionRequest?, error: NSError?) in
-		...
+            (userCollection: MSCollection?, next: MSGraphUsersCollectionRequest?, error: Swift.Error?) in
+            
+            if let nsError = error {
+                completion(.failure(Error.UnexpectedError(nsError: nsError as NSError? )as NSError))
+            }
+            else {
+                if let users = userCollection {
+                    completion(.success(users.value as! [MSGraphUser]))
+                }
             }
         }
     }
+
    ```
    
 2. Get user profile (photo value)
    ```swift
- func getPhotoValue(forUser upn: String, with completion: (result: GraphResult<UIImage, Error>) -> Void) {
-        graphClient.users(upn).photoValue().downloadWithCompletion {
-            (url: NSURL?, response: NSURLResponse?, error: NSError?) in
-       ...
-		}
- }
+    // Get photovalue
+    func getPhotoValue(forUser upn: String, with completion: @escaping (_ result: GraphResult<UIImage, NSError>) -> Void) {
+        graphClient.users(upn).photoValue().download {
+            (url: URL?, response: URLResponse?, error: Swift.Error?) in
+            ...            
+        }
+
    ```
 
 #### Cognitive Services - Face API
