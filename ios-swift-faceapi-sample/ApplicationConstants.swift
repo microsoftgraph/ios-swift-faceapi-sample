@@ -16,7 +16,7 @@ struct ApplicationConstants {
     static let ocpApimSubscriptionKey = "ENTER_SUBSCRIPTION_KEY"
 }
 
-enum Error: ErrorType {
+enum Error: Swift.Error {
     case UnexpectedError(nsError: NSError?)
     case ServiceError(json: [String: AnyObject])
     case JSonSerializationError

@@ -9,7 +9,7 @@ struct Authentication {
     var authenticationProvider: NXOAuth2AuthenticationProvider?
         {
         get {
-            return NXOAuth2AuthenticationProvider.sharedAuthProvider()
+            return NXOAuth2AuthenticationProvider.sharedAuth()
         }
     }
 }
@@ -23,37 +23,37 @@ extension Authentication {
      */
     func connectToGraph(withClientId clientId: String,
                                      scopes: [String],
-                                     completion:(result: GraphResult<JSON, Error>) -> Void) {
+                                     completion:@escaping (_ result: GraphResult<JSON, Error>) -> Void) {
     
         // Set client ID
         NXOAuth2AuthenticationProvider.setClientId(clientId, scopes: scopes)
         
         // Try silent log in. This will attempt to sign in if there is a previous successful
         // sign in user information.
-        if NXOAuth2AuthenticationProvider.sharedAuthProvider().loginSilent() == true {
-            completion(result: .Success(""))
+        if NXOAuth2AuthenticationProvider.sharedAuth().loginSilent() == true {
+            completion(.success("" as AnyObject))
         }
         // Otherwise, present log in controller.
         else {
-            NXOAuth2AuthenticationProvider.sharedAuthProvider()
-                .loginWithViewController(nil) { (error: NSError?) in
+            NXOAuth2AuthenticationProvider.sharedAuth()
+                .login(with: nil) { (error: Swift.Error?) in
                     
                     if let nsError = error {
-                        completion(result: .Failure(Error.UnexpectedError(nsError: nsError)))
+                        completion(.failure(Error.unexpectedError(nsError: nsError as NSError?)))
                     }
                     else {
-                        completion(result: .Success(""))
+                        completion(.success("" as AnyObject))
                     }
             }
         }
     }
     
     func disconnect() {
-        NXOAuth2AuthenticationProvider.sharedAuthProvider().logout()
+        NXOAuth2AuthenticationProvider.sharedAuth().logout()
     }
     
     func isConnected() -> Bool {
-        if NXOAuth2AuthenticationProvider.sharedAuthProvider().loginSilent() == true {
+        if NXOAuth2AuthenticationProvider.sharedAuth().loginSilent() == true {
             return true
         }
         else {

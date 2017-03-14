@@ -6,15 +6,15 @@
 import UIKit
 
 enum State {
-    case Connecting
-    case ReadyToConnect
-    case Error
+    case connecting
+    case readyToConnect
+    case error
 }
 
 class ConnectViewController: UIViewController {
 
     @IBOutlet var connectButton: UIButton!
-    var state: State = .ReadyToConnect
+    var state: State = .readyToConnect
     
     let authentication: Authentication = Authentication()
     
@@ -26,9 +26,9 @@ class ConnectViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "selectPhoto" {
-            let photoSelectorVC = segue.destinationViewController as! PhotoSelectorTableViewController
+            let photoSelectorVC = segue.destination as! PhotoSelectorTableViewController
             photoSelectorVC.authentication = authentication
         }
     }
@@ -38,45 +38,45 @@ class ConnectViewController: UIViewController {
 // Connect action & UI Helpers
 extension ConnectViewController {
     
-    @IBAction func connectToGraph(sender: AnyObject) {
+    @IBAction func connectToGraph(_ sender: AnyObject) {
         
-        if state == .Connecting {
+        if state == .connecting {
             return
         }
         
-        setConnectButton(.Connecting)
+        setConnectButton(.connecting)
         
         let clientId = ApplicationConstants.clientId
         let scopes = ApplicationConstants.scopes
         
         authentication.connectToGraph(withClientId: clientId, scopes: scopes) { (result) in
             switch result {
-            case .Success(_):
+            case .success(_):
                 MSGraphClient.setAuthenticationProvider(self.authentication.authenticationProvider)
-                self.setConnectButton(.ReadyToConnect)
-                self.performSegueWithIdentifier("selectPhoto", sender: nil)
+                self.setConnectButton(.readyToConnect)
+                self.performSegue(withIdentifier: "selectPhoto", sender: nil)
                 break
-            case .Failure(let error):
+            case .failure(let error):
                 print("[Error]", error)
-                self.setConnectButton(.Error)
+                self.setConnectButton(.error)
                 break
             }
         }
     }
     
-    func setConnectButton(state: State) {
+    func setConnectButton(_ state: State) {
         switch state {
-        case .Connecting:
-            connectButton.enabled = false
-            connectButton.setTitle("Connecting", forState: .Normal)
+        case .connecting:
+            connectButton.isEnabled = false
+            connectButton.setTitle("Connecting", for: UIControlState())
             break
-        case .ReadyToConnect:
-            connectButton.enabled = true
-            connectButton.setTitle("Start by connecting to Microsoft Graph", forState: .Normal)
+        case .readyToConnect:
+            connectButton.isEnabled = true
+            connectButton.setTitle("Start by connecting to Microsoft Graph", for: UIControlState())
             break
-        case .Error:
-            connectButton.enabled = true
-            connectButton.setTitle("Connection failed. Retry.", forState: .Normal)
+        case .error:
+            connectButton.isEnabled = true
+            connectButton.setTitle("Connection failed. Retry.", for: UIControlState())
             break
         }
     }

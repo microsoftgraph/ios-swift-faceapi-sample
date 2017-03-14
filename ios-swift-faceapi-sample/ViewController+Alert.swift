@@ -6,11 +6,11 @@
 import UIKit
 
 extension UIViewController {
-    func alert(title: String?, message: String?, buttonTitle: String = "Close") {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: buttonTitle, style: .Default, handler: nil))
-        dispatch_async(dispatch_get_main_queue(),{
-            self.presentViewController(alert, animated: true, completion: nil)
+    func alert(_ title: String?, message: String?, buttonTitle: String = "Close") {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: buttonTitle, style: .default, handler: nil))
+        DispatchQueue.main.async(execute: {
+            self.present(alert, animated: true, completion: nil)
         })
     }
 }

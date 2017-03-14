@@ -3,5 +3,5 @@
  * See LICENSE in the project root for license information.
  */
 
-#import <MSGraphSDK.h>
+#import <MSGraphSDK/MSGraphSDK.h>
 #import <MSGraphSDKNXOAuth2.h>

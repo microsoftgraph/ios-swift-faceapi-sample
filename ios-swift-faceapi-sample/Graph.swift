@@ -5,9 +5,9 @@
 
 import UIKit
 
-enum GraphResult<T, Error: ErrorType> {
-    case Success(T)
-    case Failure(Error)
+enum GraphResult<T, Error: Swift.Error> {
+    case success(T)
+    case failure(Error)
 }
 
 struct Graph {
@@ -17,16 +17,16 @@ struct Graph {
     }()
     
     // Read contacts
-    func getUsers(with completion: (result: GraphResult<[MSGraphUser], Error>) -> Void) {
+    func getUsers(with completion: @escaping (_ result: GraphResult<[MSGraphUser], NSError>) -> Void) {
         graphClient.users().request().getWithCompletion {
-            (userCollection: MSCollection?, next: MSGraphUsersCollectionRequest?, error: NSError?) in
+            (userCollection: MSCollection?, next: MSGraphUsersCollectionRequest?, error: Swift.Error?) in
             
             if let nsError = error {
-                completion(result: .Failure(Error.UnexpectedError(nsError: nsError)))
+                completion(.failure(Error.unexpectedError(nsError: nsError as NSError? )as NSError))
             }
             else {
                 if let users = userCollection {
-                    completion(result: .Success(users.value as! [MSGraphUser]))
+                    completion(.success(users.value as! [MSGraphUser]))
                 }
             }
         }
@@ -35,37 +35,37 @@ struct Graph {
     
     
     // Get photovalue
-    func getPhotoValue(forUser upn: String, with completion: (result: GraphResult<UIImage, Error>) -> Void) {
-        graphClient.users(upn).photoValue().downloadWithCompletion {
-            (url: NSURL?, response: NSURLResponse?, error: NSError?) in
+    func getPhotoValue(forUser upn: String, with completion: @escaping (_ result: GraphResult<UIImage, NSError>) -> Void) {
+        graphClient.users(upn).photoValue().download {
+            (url: URL?, response: URLResponse?, error: Swift.Error?) in
             
             if let nsError = error {
-                completion(result: .Failure(Error.UnexpectedError(nsError: nsError)))
+                completion(.failure( Error.unexpectedError(nsError: nsError as NSError?) as NSError))
                 return
             }
             
             guard let picUrl = url else {
-                completion(result: .Failure(Error.UnexpectedError(nsError: nil)))
+                completion(.failure(Error.unexpectedError(nsError: nil) as NSError))
                 return
             }
             
             print(picUrl)
             
-            let picData = NSData(contentsOfURL: picUrl)
-            let picImage = UIImage(data: picData!)
+            let picData = NSData(contentsOf: picUrl)
+            let picImage = UIImage(data: picData! as Data)
             
             do {
-               try NSFileManager.defaultManager().removeItemAtURL(picUrl)
+               try FileManager.default.removeItem(at: picUrl)
             }
             catch (let error) {
                 print("delete error", error)
             }
             
             if let validPic = picImage {
-                completion(result: .Success(validPic))
+                completion(.success(validPic))
             }
             else {
-                completion(result: .Failure(Error.UnexpectedError(nsError: nil)))
+                completion(.failure(Error.unexpectedError(nsError: nil) as NSError))
             }
             
         }

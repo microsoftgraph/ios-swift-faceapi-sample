@@ -23,7 +23,7 @@ struct Person {
 }
 
 protocol PersonSelecting {
-    func select(person: Person)
+    func select(_ person: Person)
 }
 
 
@@ -36,7 +36,7 @@ class PhotoSelectorTableViewController: UITableViewController {
     
     let imagePicker = UIImagePickerController()
     
-    private var selectedType: SelectedType!
+    fileprivate var selectedType: SelectedType!
     
     @IBOutlet var startButton: UIBarButtonItem!
     @IBOutlet var backButton: UIBarButtonItem!
@@ -46,12 +46,12 @@ class PhotoSelectorTableViewController: UITableViewController {
 
         navigationItem.setHidesBackButton(true, animated: false)
         
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         
         imagePicker.delegate = self
-        startButton.enabled = false
+        startButton.isEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,30 +62,30 @@ class PhotoSelectorTableViewController: UITableViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "selectPerson" {
-            let selectPersonVC = segue.destinationViewController as! SelectPersonTableViewController
+            let selectPersonVC = segue.destination as! SelectPersonTableViewController
             selectPersonVC.delegate = self
         }
             
         else if segue.identifier == "startFaceAPI" {
-            let faceAPIVC = segue.destinationViewController as! FaceApiTableViewController
+            let faceAPIVC = segue.destination as! FaceApiTableViewController
             faceAPIVC.selectedPhoto = selectedPhoto
             faceAPIVC.selectedPerson = selectedPerson
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if let _ = selectedPerson,
-            _ = selectedPhoto {
-            startButton.enabled = true
+            let _ = selectedPhoto {
+            startButton.isEnabled = true
         }
         else {
-            startButton.enabled = false
+            startButton.isEnabled = false
         }
     }
 
@@ -93,19 +93,19 @@ class PhotoSelectorTableViewController: UITableViewController {
 
 // MARK: - PersonSelecting, Photo selecting
 extension PhotoSelectorTableViewController: PersonSelecting, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func select(person: Person) {
+    func select(_ person: Person) {
         selectedPerson = person
         tableView.reloadData()
     }
     
     func selectPhoto() {
         imagePicker.allowsEditing = false
-        imagePicker.sourceType = .PhotoLibrary
+        imagePicker.sourceType = .photoLibrary
         
-        presentViewController(imagePicker, animated: true, completion: nil)
+        present(imagePicker, animated: true, completion: nil)
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             if selectedType == .singlePerson {
                 let person = Person(name: "Local photo", upn: "local photo", image: pickedImage)
@@ -116,13 +116,13 @@ extension PhotoSelectorTableViewController: PersonSelecting, UIImagePickerContro
             }
         }
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
         
         tableView.reloadData()
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -132,11 +132,11 @@ extension PhotoSelectorTableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let _ = selectedPhoto {
             return 3
         }
@@ -145,28 +145,28 @@ extension PhotoSelectorTableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: UITableViewCell
         
         if indexPath.row == 0 {
-            cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier.selectPersonCell, forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.selectPersonCell, for: indexPath)
             if let person = selectedPerson {
                 cell.textLabel!.text = person.name
                 cell.imageView!.image = person.image
             }
         }
         else if indexPath.row == 1 {
-            cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier.selectPhotoCell, forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.selectPhotoCell, for: indexPath)
             if let _ = selectedPhoto {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else {
-                cell.accessoryType = .None
+                cell.accessoryType = .none
             }
         }
         else {
-            cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier.photoCell, forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.photoCell, for: indexPath)
             if let photo = selectedPhoto {
                 let imageView = cell.viewWithTag(101) as! UIImageView
                 imageView.image = photo
@@ -177,20 +177,20 @@ extension PhotoSelectorTableViewController {
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             
-            let alertController = UIAlertController(title: "Select source", message: "", preferredStyle: .ActionSheet)
-            alertController.addAction(UIAlertAction(title: "Graph Directory", style: .Default, handler: { (action) in
-                self.performSegueWithIdentifier("selectPerson", sender: nil)
+            let alertController = UIAlertController(title: "Select source", message: "", preferredStyle: .actionSheet)
+            alertController.addAction(UIAlertAction(title: "Graph Directory", style: .default, handler: { (action) in
+                self.performSegue(withIdentifier: "selectPerson", sender: nil)
             }))
-            alertController.addAction(UIAlertAction(title: "Photos", style: .Default, handler: { (action) in
+            alertController.addAction(UIAlertAction(title: "Photos", style: .default, handler: { (action) in
                 self.selectedType = .singlePerson
                 self.selectPhoto()
             }))
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
             
             
         }
@@ -204,13 +204,13 @@ extension PhotoSelectorTableViewController {
 
 extension PhotoSelectorTableViewController {
     
-    @IBAction func start(sender: AnyObject) {
-        performSegueWithIdentifier("startFaceAPI", sender: nil)
+    @IBAction func start(_ sender: AnyObject) {
+        performSegue(withIdentifier: "startFaceAPI", sender: nil)
     }
     
-    @IBAction func disconnect(sender: AnyObject) {
+    @IBAction func disconnect(_ sender: AnyObject) {
         authentication.disconnect()
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
     }
 }
 

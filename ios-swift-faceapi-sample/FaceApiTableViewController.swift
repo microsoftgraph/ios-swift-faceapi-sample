@@ -41,7 +41,7 @@ class FaceApiTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -51,7 +51,7 @@ class FaceApiTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         identifyFace()
     }
@@ -60,11 +60,11 @@ class FaceApiTableViewController: UITableViewController {
 
 // MARK: - TableView
 extension FaceApiTableViewController {
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isLoading {
             return 2
         }
@@ -73,25 +73,25 @@ extension FaceApiTableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier.photoCell, forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.photoCell, for: indexPath)
             let imageView = cell.viewWithTag(101) as! UIImageView
             imageView.image = selectedPhoto
             return cell
         }
         else if indexPath.row == 1 && isLoading == true {
-            return tableView.dequeueReusableCellWithIdentifier(CellIdentifier.loadingCell, forIndexPath: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: CellIdentifier.loadingCell, for: indexPath)
         }
         else {
             if result.count - 1 < indexPath.row - 1 {
-                return tableView.dequeueReusableCellWithIdentifier(CellIdentifier.notFoundCell, forIndexPath: indexPath)
+                return tableView.dequeueReusableCell(withIdentifier: CellIdentifier.notFoundCell, for: indexPath)
             }
             
             let record = result[indexPath.row - 1]
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier.resultCell, forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.resultCell, for: indexPath)
             let imageView = cell.viewWithTag(101) as! UIImageView
             let label = cell.viewWithTag(102) as! UILabel
             
@@ -121,16 +121,16 @@ extension FaceApiTableViewController {
         createPersonGroup(FaceAPIConstant.personGroupId)
     }
     
-    func createPersonGroup(groupId: String) {
+    func createPersonGroup(_ groupId: String) {
         FaceAPI.createPersonGroup(groupId,
                                   name: "SampleGroup",
                                   userData: "This is a sample group") { (result) in
                                     switch result {
-                                    case .Success(let json):
+                                    case .success(let json):
                                         print("Created person group - ", json)
                                         self.addPerson(self.selectedPerson.name, userData: nil, personGroupId: groupId)
                                         break
-                                    case .Failure(let error):
+                                    case .failure(let error):
                                         print("Error creating person group - ", error)
                                         self.alert("Error", message: "Check log for more details")
                                         break
@@ -138,16 +138,16 @@ extension FaceApiTableViewController {
         }
     }
     
-    func addPerson(name: String, userData: String?, personGroupId: String) {
+    func addPerson(_ name: String, userData: String?, personGroupId: String) {
         FaceAPI.createPerson(name, userData: userData, personGroupId: personGroupId) { (result) in
             switch result {
-            case .Success(let json):
+            case .success(let json):
                 
                 let personId = json["personId"] as! String
                 print("Created person - ", personId)
                 self.uploadPersonFace(self.selectedPerson.image!, personId: personId, personGroupId: personGroupId)
                 break
-            case .Failure(let error):
+            case .failure(let error):
                 print("Error adding a person - ", error)
                 self.alert("Error", message: "Check log for more details")
                 self.isLoading = false
@@ -159,14 +159,14 @@ extension FaceApiTableViewController {
     }
 
     
-    func uploadPersonFace(image: UIImage, personId: String, personGroupId: String) {
+    func uploadPersonFace(_ image: UIImage, personId: String, personGroupId: String) {
         FaceAPI.uploadFace(image, personId: personId, personGroupId: personGroupId) { (result) in
             switch result {
-            case .Success(_):
+            case .success(_):
                 print("face uploaded - ", personId)
                 self.train(personGroupId, personToFind: personId)
                 break
-            case .Failure(let error):
+            case .failure(let error):
                 print("Error uploading a face - ", error)
                 self.alert("Error", message: "Check log for more details")
                 self.isLoading = false
@@ -176,10 +176,10 @@ extension FaceApiTableViewController {
         }
     }
 
-    func train(personGroupId: String, personToFind: String) {
+    func train(_ personGroupId: String, personToFind: String) {
         FaceAPI.trainPersonGroup(personGroupId) { (result) in
             switch result {
-            case .Success(_):
+            case .success(_):
                 print("train posted")
                 self.checkForTrainComplete(personGroupId, completion: {
                     self.detectFaces(self.selectedPhoto, completion: { (faces) in
@@ -187,7 +187,7 @@ extension FaceApiTableViewController {
                     })
                 })
                 break
-            case .Failure(let error):
+            case .failure(let error):
                 print("Error posting to train - ", error)
                 self.alert("Error", message: "Check log for more details")
                 self.isLoading = false
@@ -198,17 +198,17 @@ extension FaceApiTableViewController {
     }
     
 
-    func checkForTrainComplete(personGroupId: String, completion: (Void) -> Void) {
+    func checkForTrainComplete(_ personGroupId: String, completion: @escaping (Void) -> Void) {
         FaceAPI.getTrainingStatus(personGroupId) { (result) in
             switch result {
-            case .Success(let json):
+            case .success(let json):
                 print("training complete - ", json)
                 let status = json["status"] as! String
                 
                 if status == "notstarted" || status == "running" {
                     print("Training in progress")
-                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-                    dispatch_after(delayTime, dispatch_get_main_queue()) {
+                    let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+                    DispatchQueue.main.asyncAfter(deadline: delayTime) {
                         self.checkForTrainComplete(personGroupId, completion: completion)
                     }
                 }
@@ -222,7 +222,7 @@ extension FaceApiTableViewController {
                 }
                 
                 break
-            case .Failure(let error):
+            case .failure(let error):
                 print("Training incomplete or error - ", error)
                 self.alert("Error", message: "Check log for more details")
                 self.isLoading = false
@@ -232,10 +232,10 @@ extension FaceApiTableViewController {
         }
     }
 
-    func detectFaces(photo: UIImage, completion: (faces: [Face]) -> Void) {
+    func detectFaces(_ photo: UIImage, completion: @escaping (_ faces: [Face]) -> Void) {
         FaceAPI.detectFaces(photo) { (result) in
             switch result {
-            case .Success(let json):
+            case .success(let json):
                 var faces = [Face]()
                 
                 let detectedFaces = json as! JSONArray
@@ -251,9 +251,9 @@ extension FaceApiTableViewController {
                                             left: rectangle["left"] as! Int)
                     faces.append(detectedFace)
                 }
-                completion(faces: faces)
+                completion(faces)
                 break
-            case .Failure(let error):
+            case .failure(let error):
                 print("DetectFaces error - ", error)
                 self.alert("Error", message: "Check log for more details")
                 self.isLoading = false
@@ -263,7 +263,7 @@ extension FaceApiTableViewController {
         }
     }
     
-    func identifyFaces(faces: [Face], personGroupId: String, personToFind: String) {
+    func identifyFaces(_ faces: [Face], personGroupId: String, personToFind: String) {
         
         print("Looking for", personToFind)
         print("in group", personGroupId)
@@ -274,7 +274,7 @@ extension FaceApiTableViewController {
         
         FaceAPI.identify(faces: faceIds, personGroupId: personGroupId) { (result) in
             switch result {
-            case .Success(let json):
+            case .success(let json):
                 let jsonArray = json as! JSONArray
 
                 for item in jsonArray {
@@ -307,11 +307,11 @@ extension FaceApiTableViewController {
                     }
                     
                     self.isLoading = false
-                    dispatch_async(dispatch_get_main_queue(),{
+                    DispatchQueue.main.async(execute: {
                         self.tableView.reloadData()
                     })
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 print("Identifying faces error - ", error)
                 self.alert("Error", message: "Check log for more details")
                 self.isLoading = false
@@ -322,11 +322,11 @@ extension FaceApiTableViewController {
     }
 
     
-    func cropFace(face: Face, image: UIImage) -> UIImage {
+    func cropFace(_ face: Face, image: UIImage) -> UIImage {
         let croppedSection = CGRect(x: CGFloat(face.left), y: CGFloat(face.top), width: CGFloat(face.width), height: CGFloat(face.height))
-        let imageRef = CGImageCreateWithImageInRect(image.CGImage, croppedSection)
+        let imageRef = image.cgImage?.cropping(to: croppedSection)
         
-        let croppedImage = UIImage(CGImage: imageRef!)
+        let croppedImage = UIImage(cgImage: imageRef!)
         
         return croppedImage
     }
