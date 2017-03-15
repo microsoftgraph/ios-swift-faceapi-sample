@@ -18,7 +18,16 @@ struct Graph {
     
     // Read contacts
     func getUsers(with completion: @escaping (_ result: GraphResult<[MSGraphUser], NSError>) -> Void) {
-        graphClient.users().request().getWithCompletion {
+        
+       // graphClient.users().request().expand("?$orderBy=userPhoto%20asc") .getWithCompletion {
+        
+        var options = [MSRequestOptions]()
+        var option = MSRequestOptions()
+        option.appendOption(toQueryString: "?$filter=userPhoto ne null")
+        options.append(option)
+        graphClient.users().request(withOptions: options).getWithCompletion{
+        //graphClient.users().request().getWithCompletion{
+
             (userCollection: MSCollection?, next: MSGraphUsersCollectionRequest?, error: Swift.Error?) in
             
             if let nsError = error {

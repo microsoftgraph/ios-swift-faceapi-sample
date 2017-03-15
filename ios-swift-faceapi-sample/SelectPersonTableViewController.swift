@@ -39,9 +39,11 @@ extension SelectPersonTableViewController {
             case .success(let result):
                 let userCollection = result
                 for user in userCollection {
-                    let person = Person(name: user.displayName, upn: user.userPrincipalName, image: nil)
-                    self.persons.append(person)
-                }
+                    //Add the user to the person collection if the user has a surname.
+                    if let surname = user.dictionaryFromItem()["surname"] as? String {
+                        let person = Person(name: user.displayName, upn: user.userPrincipalName, image: nil)
+                        self.persons.append(person)
+                    }                 }
                 
                 DispatchQueue.main.async( execute: {
                     self.tableView.reloadData()
