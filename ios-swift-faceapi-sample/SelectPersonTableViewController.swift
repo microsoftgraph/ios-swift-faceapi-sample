@@ -39,8 +39,12 @@ extension SelectPersonTableViewController {
             case .success(let result):
                 let userCollection = result
                 for user in userCollection {
-                    //Add the user to the person collection if the user has a surname.
-                    if let surname = user.dictionaryFromItem()["surname"] as? String {
+                    
+                    //Add the user to the person collection if the user has a surname. This
+                    //client side filter removes any conference rooms from the list. 
+                    //ApplicationConstants.selectString provides a list of user properties to return.
+                    //the 'surname' property must be in the select string for this client filter to work
+                    if ((user.dictionaryFromItem()["surname"] as? String) != nil) {
                         let person = Person(name: user.displayName, upn: user.userPrincipalName, image: nil)
                         self.persons.append(person)
                     }                 }

@@ -19,14 +19,11 @@ struct Graph {
     // Read contacts
     func getUsers(with completion: @escaping (_ result: GraphResult<[MSGraphUser], NSError>) -> Void) {
         
-       // graphClient.users().request().expand("?$orderBy=userPhoto%20asc") .getWithCompletion {
-        
-        var options = [MSRequestOptions]()
-        var option = MSRequestOptions()
-        option.appendOption(toQueryString: "?$filter=userPhoto ne null")
-        options.append(option)
-        graphClient.users().request(withOptions: options).getWithCompletion{
-        //graphClient.users().request().getWithCompletion{
+        //Note: This query does not cause a server-side filtering of users. If the query is run against
+        // organizations with large numbers of users, up to 999 users are returned in the response. Users
+        // can include conference rooms which do not have pictures.  
+        //If you need server-side filtering, use the Microsoft Graph REST API.
+        graphClient.users().request().select(ApplicationConstants.selectString).order(by: ApplicationConstants.orderByString).getWithCompletion {
 
             (userCollection: MSCollection?, next: MSGraphUsersCollectionRequest?, error: Swift.Error?) in
             
