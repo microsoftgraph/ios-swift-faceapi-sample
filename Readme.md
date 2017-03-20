@@ -51,11 +51,13 @@ For this sample, scopes for Graph have been pre-defined for you.
 #### Graph
 This sample contains two Microsoft Graph calls, both of which are in **Graph.swift** file under /Graph.
 
+>Note: The getUsers query returns all of the users in an organization. Server side filtering cannot be performed with the Microsoft Graph library.
+
 1. Get user's directory
    ```swift
     // Read contacts
     func getUsers(with completion: @escaping (_ result: GraphResult<[MSGraphUser], NSError>) -> Void) {
-        graphClient.users().request().getWithCompletion {
+        graphClient.users().request().select(ApplicationConstants.selectString).order(by: ApplicationConstants.orderByString).getWithCompletion {
             (userCollection: MSCollection?, next: MSGraphUsersCollectionRequest?, error: Swift.Error?) in
             
             if let nsError = error {
