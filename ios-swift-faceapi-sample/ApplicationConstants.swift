@@ -5,10 +5,10 @@
 
 import Foundation
 
-struct ApplicationConstants {
-    
+struct ApplicationConstants
+{
     // Graph information
-    static let clientId = "ENTER_CLIENT_ID"
+    static let clientId = "80bb7030-baf9-4539-bb68-d092e3e20358"
     static let scopes   = ["User.ReadBasic.All",
                            "offline_access"]
     
@@ -16,7 +16,8 @@ struct ApplicationConstants {
     static let ocpApimSubscriptionKey = "ENTER_SUBSCRIPTION_KEY"
 }
 
-enum Error: ErrorType {
+enum ErrorType: Error
+{
     case UnexpectedError(nsError: NSError?)
     case ServiceError(json: [String: AnyObject])
     case JSonSerializationError

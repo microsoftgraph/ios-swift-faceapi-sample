@@ -5,58 +5,50 @@
 
 import Foundation
 
-struct Authentication {
+struct Authentication
+{
     var authenticationProvider: NXOAuth2AuthenticationProvider?
         {
         get {
-            return NXOAuth2AuthenticationProvider.sharedAuthProvider()
+            return NXOAuth2AuthenticationProvider.sharedAuth()
         }
     }
 }
 
-extension Authentication {
-    /**
-     Authenticates to Microsoft Graph. 
-     If a user has previously signed in before and not disconnected, silent log in
-     will take place. 
-     If not, authentication will ask for credentials
-     */
-    func connectToGraph(withClientId clientId: String,
-                                     scopes: [String],
-                                     completion:(result: GraphResult<JSON, Error>) -> Void) {
-    
+extension Authentication
+{
+    func acquireAuthToken(clientId: String, scopes: [String], completion:@escaping (_ success:Bool, _ error: NSError?) -> Void)
+    {
         // Set client ID
         NXOAuth2AuthenticationProvider.setClientId(clientId, scopes: scopes)
+        NXOAuth2AuthenticationProvider.sharedAuth()?.redirectURL = "msauth.com.microsoft.ios-swift-faceapi-sample://auth/"
         
         // Try silent log in. This will attempt to sign in if there is a previous successful
         // sign in user information.
-        if NXOAuth2AuthenticationProvider.sharedAuthProvider().loginSilent() == true {
-            completion(result: .Success(""))
-        }
-        // Otherwise, present log in controller.
-        else {
-            NXOAuth2AuthenticationProvider.sharedAuthProvider()
-                .loginWithViewController(nil) { (error: NSError?) in
+        if NXOAuth2AuthenticationProvider.sharedAuth().loginSilent() == true {
+            completion(true, nil)
+        } else {
+            // Otherwise, present log in controller.
+            NXOAuth2AuthenticationProvider.sharedAuth().login(with: nil) { (error) in
                     
-                    if let nsError = error {
-                        completion(result: .Failure(Error.UnexpectedError(nsError: nsError)))
-                    }
-                    else {
-                        completion(result: .Success(""))
+                    if let nsError = error as NSError? {
+                        completion(false, nsError)
+                    } else {
+                        completion(true, nil)
                     }
             }
         }
     }
     
     func disconnect() {
-        NXOAuth2AuthenticationProvider.sharedAuthProvider().logout()
+        NXOAuth2AuthenticationProvider.sharedAuth().logout()
     }
     
-    func isConnected() -> Bool {
-        if NXOAuth2AuthenticationProvider.sharedAuthProvider().loginSilent() == true {
+    func isConnected() -> Bool
+    {
+        if NXOAuth2AuthenticationProvider.sharedAuth().loginSilent() == true {
             return true
-        }
-        else {
+        } else {
             return false
         }
     }

@@ -5,53 +5,50 @@
 
 import UIKit
 
-enum FaceAPIResult<T, Error: ErrorType> {
+enum FaceAPIResult<T, E>
+{
     case Success(T)
-    case Failure(Error)
+    case Failure(E)
 }
 
-class FaceAPI: NSObject {
-    
+class FaceAPI: NSObject
+{
     // Create person group
-    static func createPersonGroup(personGroupId: String, name: String, userData: String?, completion: (result: FaceAPIResult<JSON, Error>) -> Void) {
-        
+    static func createPersonGroup(personGroupId: String, name: String, userData: String?, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
+    {
         let url = "https://api.projectoxford.ai/face/v1.0/persongroups/"
         let urlWithParams = url + personGroupId
         
-        let request = NSMutableURLRequest(URL: NSURL(string: urlWithParams)!)
-        request.HTTPMethod = "PUT"
+        var request = URLRequest(url: URL(string: urlWithParams)!)
+        request.httpMethod = "PUT"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(ApplicationConstants.ocpApimSubscriptionKey, forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
         
-        var json: [String: AnyObject] = ["name": name]
+        var json: [String: AnyObject] = ["name": name as AnyObject]
         
         if let userData = userData {
-            json["userData"] = userData
+            json["userData"] = userData as AnyObject
         }
         
-        let jsonData = try! NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
-        request.HTTPBody = jsonData
+        let jsonData = try! JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+        request.httpBody = jsonData
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            if let nsError = error {
-                completion(result: .Failure(Error.UnexpectedError(nsError: nsError)))
-            }
-            else {
-                let httpResponse = response as! NSHTTPURLResponse
+            if let nsError = error as NSError? {
+                completion(.Failure(ErrorType.UnexpectedError(nsError: nsError)))
+            } else {
+                let httpResponse = response as! HTTPURLResponse
                 let statusCode = httpResponse.statusCode
-
+                
                 if (statusCode == 200 || statusCode == 409) {
-                    completion(result: .Success([]))
-                }
-
-                else {
+                    completion(.Success([] as AnyObject))
+                } else {
                     do {
-                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! JSONDictionary
-                        completion(result: .Failure(Error.ServiceError(json: json)))
-                    }
-                    catch {
-                        completion(result: .Failure(Error.JSonSerializationError))
+                        let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! JSONDictionary
+                        completion(.Failure(ErrorType.ServiceError(json: json)))
+                    } catch {
+                        completion(.Failure(ErrorType.JSonSerializationError))
                     }
                 }
             }
@@ -61,40 +58,38 @@ class FaceAPI: NSObject {
     
     
     // Create person
-    static func createPerson(personName: String, userData: String?, personGroupId: String, completion: (result: FaceAPIResult<JSON, Error>) -> Void) {
-        
+    static func createPerson(personName: String, userData: String?, personGroupId: String, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
+    {
         let url = "https://api.projectoxford.ai/face/v1.0/persongroups/\(personGroupId)/persons"
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        var request = URLRequest(url: URL(string: url)!)
         
-        request.HTTPMethod = "POST"
+        request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(ApplicationConstants.ocpApimSubscriptionKey, forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
         
-        var json: [String: AnyObject] = ["name": personName]
+        var json: [String: AnyObject] = ["name": personName as AnyObject]
         if let userData = userData {
-            json["userData"] = userData
+            json["userData"] = userData as AnyObject
         }
         
-        let jsonData = try! NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
-        request.HTTPBody = jsonData
+        let jsonData = try! JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+        request.httpBody = jsonData
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            if let nsError = error {
-                completion(result: .Failure(Error.UnexpectedError(nsError: nsError)))
-            }
-            else {
-                let httpResponse = response as! NSHTTPURLResponse
+            if let nsError = error as NSError? {
+                completion(.Failure(ErrorType.UnexpectedError(nsError: nsError)))
+            } else {
+                let httpResponse = response as! HTTPURLResponse
                 let statusCode = httpResponse.statusCode
                 
                 do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments)
                     if statusCode == 200 {
-                        completion(result: .Success(json))
+                        completion(.Success(json as AnyObject))
                     }
-                }
-                catch {
-                    completion(result: .Failure(Error.JSonSerializationError))
+                } catch {
+                    completion(.Failure(ErrorType.JSonSerializationError))
                 }
             }
         }
@@ -103,34 +98,32 @@ class FaceAPI: NSObject {
 
     
     // Upload face
-    static func uploadFace(faceImage: UIImage, personId: String, personGroupId: String, completion: (result: FaceAPIResult<JSON, Error>) -> Void) {
-        
+    static func uploadFace(faceImage: UIImage, personId: String, personGroupId: String, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
+    {
         let url = "https://api.projectoxford.ai/face/v1.0/persongroups/\(personGroupId)/persons/\(personId)/persistedFaces"
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        var request = URLRequest(url: URL(string: url)!)
         
-        request.HTTPMethod = "POST"
+        request.httpMethod = "POST"
         request.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
         request.setValue(ApplicationConstants.ocpApimSubscriptionKey, forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
         
-        let pngRepresentation = UIImagePNGRepresentation(faceImage)
+        let pngRepresentation = faceImage.pngData()
         
-        let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: pngRepresentation) { (data, response, error) in
+        let task = URLSession.shared.uploadTask(with: request, from: pngRepresentation) { (data, response, error) in
             
-            if let nsError = error {
-                completion(result: .Failure(Error.UnexpectedError(nsError: nsError)))
-            }
-            else {
-                let httpResponse = response as! NSHTTPURLResponse
+            if let nsError = error as NSError? {
+                completion(.Failure(ErrorType.UnexpectedError(nsError: nsError)))
+            } else {
+                let httpResponse = response as! HTTPURLResponse
                 let statusCode = httpResponse.statusCode
                 
                 do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments)
                     if statusCode == 200 {
-                        completion(result: .Success(json))
+                        completion(.Success(json as AnyObject))
                     }
-                }
-                catch {
-                    completion(result: .Failure(Error.JSonSerializationError))
+                } catch {
+                    completion(.Failure(ErrorType.JSonSerializationError))
                 }
             }
         }
@@ -139,35 +132,32 @@ class FaceAPI: NSObject {
     
     
     // Post training
-    static func trainPersonGroup(personGroupId: String, completion: (result: FaceAPIResult<JSON, Error>) -> Void) {
-        
+    static func trainPersonGroup(personGroupId: String, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
+    {
         let url = "https://api.projectoxford.ai/face/v1.0/persongroups/\(personGroupId)/train"
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        var request = URLRequest(url: URL(string: url)!)
         
-        request.HTTPMethod = "POST"
+        request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(ApplicationConstants.ocpApimSubscriptionKey, forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            if let nsError = error {
-                completion(result: .Failure(Error.UnexpectedError(nsError: nsError)))
-            }
-            else {
-                let httpResponse = response as! NSHTTPURLResponse
+            if let nsError = error as NSError? {
+                completion(.Failure(ErrorType.UnexpectedError(nsError: nsError)))
+            } else {
+                let httpResponse = response as! HTTPURLResponse
                 let statusCode = httpResponse.statusCode
                 
                 do {
                     if statusCode == 202 {
-                        completion(result: .Success([]))
+                        completion(.Success([] as AnyObject))
+                    } else {
+                        let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! JSONDictionary
+                        completion(.Failure(ErrorType.ServiceError(json: json)))
                     }
-                    else {
-                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! JSONDictionary
-                        completion(result: .Failure(Error.ServiceError(json: json)))
-                    }
-                }
-                catch {
-                    completion(result: .Failure(Error.JSonSerializationError))
+                } catch {
+                    completion(.Failure(ErrorType.JSonSerializationError))
                 }
             }
         }
@@ -176,26 +166,24 @@ class FaceAPI: NSObject {
 
     
     // Get training status
-    static func getTrainingStatus(personGroupId: String, completion: (result: FaceAPIResult<JSON, Error>) -> Void) {
-        
+    static func getTrainingStatus(personGroupId: String, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
+    {
         let url = "https://api.projectoxford.ai/face/v1.0/persongroups/\(personGroupId)/training"
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        var request = URLRequest(url: URL(string: url)!)
         
-        request.HTTPMethod = "GET"
+        request.httpMethod = "GET"
         request.setValue(ApplicationConstants.ocpApimSubscriptionKey, forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            if let nsError = error {
-                completion(result: .Failure(Error.UnexpectedError(nsError: nsError)))
-            }
-            else {
+            if let nsError = error as NSError? {
+                completion(.Failure(ErrorType.UnexpectedError(nsError: nsError)))
+            } else {
                 do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
-                    completion(result: .Success(json))
-                }
-                catch {
-                    completion(result: .Failure(Error.JSonSerializationError))
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments)
+                    completion(.Success(json as AnyObject))
+                } catch {
+                    completion(.Failure(ErrorType.JSonSerializationError))
                 }
             }
         }
@@ -204,37 +192,34 @@ class FaceAPI: NSObject {
     
     
     // Detect faces
-    static func detectFaces(facesPhoto: UIImage, completion: (result: FaceAPIResult<JSON, Error>) -> Void) {
-        
+    static func detectFaces(facesPhoto: UIImage, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
+    {
         let url = "https://api.projectoxford.ai/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false"
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        var request = URLRequest(url: URL(string: url)!)
         
-        request.HTTPMethod = "POST"
+        request.httpMethod = "POST"
         request.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
         request.setValue(ApplicationConstants.ocpApimSubscriptionKey, forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
         
-        let pngRepresentation = UIImagePNGRepresentation(facesPhoto)
+        let pngRepresentation = facesPhoto.pngData()
         
-        let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: pngRepresentation) { (data, response, error) in
+        let task = URLSession.shared.uploadTask(with: request, from: pngRepresentation) { (data, response, error) in
             
-            if let nsError = error {
-                completion(result: .Failure(Error.UnexpectedError(nsError: nsError)))
-            }
-            else {
-                let httpResponse = response as! NSHTTPURLResponse
+            if let nsError = error as NSError? {
+                completion(.Failure(ErrorType.UnexpectedError(nsError: nsError)))
+            } else {
+                let httpResponse = response as! HTTPURLResponse
                 let statusCode = httpResponse.statusCode
                 
                 do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments)
                     if statusCode == 200 {
-                        completion(result: .Success(json))
+                        completion(.Success(json as AnyObject))
+                    } else {
+                        completion(.Failure(ErrorType.ServiceError(json: json as! [String : AnyObject])))
                     }
-                    else {
-                        completion(result: .Failure(Error.ServiceError(json: json as! [String : AnyObject])))
-                    }
-                }
-                catch {
-                    completion(result: .Failure(Error.JSonSerializationError))
+                } catch {
+                    completion(.Failure(ErrorType.JSonSerializationError))
                 }
             }
         }
@@ -243,45 +228,42 @@ class FaceAPI: NSObject {
     
     
     // Identify faces in people group
-    static func identify(faces faceIds: [String], personGroupId: String, completion: (result: FaceAPIResult<JSON, Error>) -> Void) {
-
+    static func identify(faces faceIds: [String], personGroupId: String, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
+    {
         let url = "https://api.projectoxford.ai/face/v1.0/identify"
-        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        var request = URLRequest(url: URL(string: url)!)
         
-        request.HTTPMethod = "POST"
+        request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(ApplicationConstants.ocpApimSubscriptionKey, forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
         
         
-        let json: [String: AnyObject] = ["personGroupId": personGroupId,
-                                         "maxNumOfCandidatesReturned": 1,
-                                         "confidenceThreshold": 0.7,
-                                         "faceIds": faceIds
+        let json: [String: AnyObject] = ["personGroupId": personGroupId as AnyObject,
+                                         "maxNumOfCandidatesReturned": 1 as AnyObject,
+                                         "confidenceThreshold": 0.7 as AnyObject,
+                                         "faceIds": faceIds as AnyObject
         ]
         
-        let jsonData = try! NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
-        request.HTTPBody = jsonData
+        let jsonData = try! JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+        request.httpBody = jsonData
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            if let nsError = error {
-                completion(result: .Failure(Error.UnexpectedError(nsError: nsError)))
-            }
-            else {
-                let httpResponse = response as! NSHTTPURLResponse
+            if let nsError = error as NSError? {
+                completion(.Failure(ErrorType.UnexpectedError(nsError: nsError)))
+            } else {
+                let httpResponse = response as! HTTPURLResponse
                 let statusCode = httpResponse.statusCode
 
                 do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments)
                     if statusCode == 200 {
-                        completion(result: .Success(json))
+                        completion(.Success(json as AnyObject))
+                    } else {
+                        completion(.Failure(ErrorType.ServiceError(json: json as! JSONDictionary)))
                     }
-                    else {
-                        completion(result: .Failure(Error.ServiceError(json: json as! JSONDictionary)))
-                    }
-                }
-                catch {
-                    completion(result: .Failure(Error.JSonSerializationError))
+                } catch {
+                    completion(.Failure(ErrorType.JSonSerializationError))
                 }
             }
         }
