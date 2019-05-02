@@ -25,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		238BA008227BB14A00A5BACD /* ios-swift-faceapi-sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-swift-faceapi-sample.entitlements"; sourceTree = "<group>"; };
 		3215642D1D267668AD70ABAD /* Pods-ios-swift-faceapi-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-swift-faceapi-sample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample.release.xcconfig"; sourceTree = "<group>"; };
 		966013A41D81DAA60066DB1D /* ApplicationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationConstants.swift; sourceTree = "<group>"; };
 		966013A61D81DABA0066DB1D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 		96A8C0DF1D81D9F100797080 /* ios-swift-faceapi-sample */ = {
 			isa = PBXGroup;
 			children = (
+				238BA008227BB14A00A5BACD /* ios-swift-faceapi-sample.entitlements */,
 				966013A01D81DA7D0066DB1D /* Application */,
 				9660139F1D81DA790066DB1D /* Resources */,
 				9660139E1D81DA770066DB1D /* Views */,
@@ -205,6 +207,11 @@
 				TargetAttributes = {
 					96A8C0DC1D81D9F100797080 = {
 						CreatedOnToolsVersion = 7.3.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -427,6 +434,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "ios-swift-faceapi-sample/ios-swift-faceapi-sample.entitlements";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "ios-swift-faceapi-sample/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -444,6 +453,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "ios-swift-faceapi-sample/ios-swift-faceapi-sample.entitlements";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "ios-swift-faceapi-sample/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
