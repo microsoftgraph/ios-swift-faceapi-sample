@@ -32,7 +32,7 @@ protocol PersonSelecting
 
 class PhotoSelectorTableViewController: UITableViewController, PersonSelecting, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
-    var authentication: Authentication!
+    var authenticationProvider: AuthenticationProvider!
     var selectedPerson: Person?
     var selectedPhoto: UIImage?
     let imagePicker = UIImagePickerController()
@@ -134,7 +134,7 @@ class PhotoSelectorTableViewController: UITableViewController, PersonSelecting, 
     
     @IBAction func disconnect(sender: AnyObject)
     {
-        authentication.disconnect()
+        authenticationProvider.disconnect()
         navigationController?.popViewController(animated: true)
     }
     

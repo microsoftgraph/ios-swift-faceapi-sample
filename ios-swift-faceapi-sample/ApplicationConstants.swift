@@ -9,8 +9,8 @@ struct ApplicationConstants
 {
     // Graph information
     static let clientId = "80bb7030-baf9-4539-bb68-d092e3e20358"
-    static let scopes   = ["User.ReadBasic.All",
-                           "offline_access"]
+    static let authority = "https://login.microsoftonline.com/common"
+    static let scopes = ["User.ReadBasic.All"]
     
     // Cognitive services information
     static let ocpApimSubscriptionKey = "ENTER_SUBSCRIPTION_KEY"

@@ -4,6 +4,7 @@
  */
 
 import UIKit
+import MSAL
 
 enum State
 {
@@ -16,13 +17,26 @@ class ConnectViewController: UIViewController
 {
     @IBOutlet var connectButton: UIButton!
     var state: State = .ReadyToConnect
-    let authentication: Authentication = Authentication()
+    let authenticationProvider: AuthenticationProvider? = {
+        guard let authorityUrl = URL(string: ApplicationConstants.authority) else { return nil }
+        
+        var authenticationProvider: AuthenticationProvider?
+        do {
+            let authority = try MSALAADAuthority(url: authorityUrl)
+            let clientId = ApplicationConstants.clientId
+            authenticationProvider = try AuthenticationProvider(clientId: clientId, authority: authority)
+        } catch let error as NSError {
+            print("Error: ", error)
+        }
+        
+        return authenticationProvider
+    }()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "selectPhoto" {
             let photoSelectorVC = segue.destination as! PhotoSelectorTableViewController
-            photoSelectorVC.authentication = authentication
+            photoSelectorVC.authenticationProvider = authenticationProvider
         }
     }
     
@@ -30,17 +44,15 @@ class ConnectViewController: UIViewController
     
     @IBAction func connectToGraph(sender: AnyObject)
     {
+        guard let authenticationProvider = self.authenticationProvider else { return }
         if state == .Connecting { return }
         
         setConnectButton(state: .Connecting)
-
-        let clientId = ApplicationConstants.clientId
         let scopes = ApplicationConstants.scopes
-
-        authentication.acquireAuthToken(clientId: clientId, scopes: scopes) { (success, error) in
-            
+        
+        authenticationProvider.acquireAuthToken(scopes: scopes) { (success, error) in
             if success {
-                MSGraphClient.setAuthenticationProvider(self.authentication.authenticationProvider)
+                MSGraphClient.setAuthenticationProvider(self.authenticationProvider)
                 self.setConnectButton(state: .ReadyToConnect)
                 self.performSegue(withIdentifier: "selectPhoto", sender: nil)
                 

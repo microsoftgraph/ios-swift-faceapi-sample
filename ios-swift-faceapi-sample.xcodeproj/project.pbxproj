@@ -14,7 +14,7 @@
 		966013AF1D81DAF60066DB1D /* PhotoSelectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013AA1D81DAF60066DB1D /* PhotoSelectorTableViewController.swift */; };
 		966013B01D81DAF60066DB1D /* SelectPersonTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013AB1D81DAF60066DB1D /* SelectPersonTableViewController.swift */; };
 		966013B11D81DAF60066DB1D /* FaceApiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013AC1D81DAF60066DB1D /* FaceApiTableViewController.swift */; };
-		966013B41D81DAFB0066DB1D /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013B21D81DAFB0066DB1D /* Authentication.swift */; };
+		966013B41D81DAFB0066DB1D /* AuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013B21D81DAFB0066DB1D /* AuthenticationProvider.swift */; };
 		966013B51D81DAFB0066DB1D /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013B31D81DAFB0066DB1D /* Graph.swift */; };
 		966013B71D81DAFF0066DB1D /* FaceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013B61D81DAFF0066DB1D /* FaceAPI.swift */; };
 		966013B91D81DB280066DB1D /* Readme.md in Sources */ = {isa = PBXBuildFile; fileRef = 966013B81D81DB280066DB1D /* Readme.md */; };
@@ -34,7 +34,7 @@
 		966013AA1D81DAF60066DB1D /* PhotoSelectorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectorTableViewController.swift; sourceTree = "<group>"; };
 		966013AB1D81DAF60066DB1D /* SelectPersonTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPersonTableViewController.swift; sourceTree = "<group>"; };
 		966013AC1D81DAF60066DB1D /* FaceApiTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceApiTableViewController.swift; sourceTree = "<group>"; };
-		966013B21D81DAFB0066DB1D /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		966013B21D81DAFB0066DB1D /* AuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
 		966013B31D81DAFB0066DB1D /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		966013B61D81DAFF0066DB1D /* FaceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceAPI.swift; sourceTree = "<group>"; };
 		966013B81D81DB280066DB1D /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 		966013A11D81DA970066DB1D /* Graph */ = {
 			isa = PBXGroup;
 			children = (
-				966013B21D81DAFB0066DB1D /* Authentication.swift */,
+				966013B21D81DAFB0066DB1D /* AuthenticationProvider.swift */,
 				966013B31D81DAFB0066DB1D /* Graph.swift */,
 			);
 			name = Graph;
@@ -305,7 +305,7 @@
 				966013A51D81DAA60066DB1D /* ApplicationConstants.swift in Sources */,
 				966013B51D81DAFB0066DB1D /* Graph.swift in Sources */,
 				966013AE1D81DAF60066DB1D /* ConnectViewController.swift in Sources */,
-				966013B41D81DAFB0066DB1D /* Authentication.swift in Sources */,
+				966013B41D81DAFB0066DB1D /* AuthenticationProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
