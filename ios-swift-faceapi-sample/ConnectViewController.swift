@@ -60,7 +60,7 @@ class ConnectViewController: UIViewController
                 return
             }
             
-            print("[Error] ", error)
+            print("[Error] ", error!)
             self.setConnectButton(state: .Error)
         }
     }
