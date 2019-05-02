@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		83ED6396A42656A40CA679D0 /* libPods-ios-swift-faceapi-sample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF100BA1519AD0319FC88EAB /* libPods-ios-swift-faceapi-sample.a */; };
 		966013A51D81DAA60066DB1D /* ApplicationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013A41D81DAA60066DB1D /* ApplicationConstants.swift */; };
 		966013A71D81DABA0066DB1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 966013A61D81DABA0066DB1D /* Main.storyboard */; };
 		966013AD1D81DAF60066DB1D /* ViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013A81D81DAF60066DB1D /* ViewController+Alert.swift */; };
@@ -22,6 +21,7 @@
 		96A8C0E11D81D9F100797080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A8C0E01D81D9F100797080 /* AppDelegate.swift */; };
 		96A8C0E81D81D9F100797080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96A8C0E71D81D9F100797080 /* Assets.xcassets */; };
 		96A8C0EB1D81D9F100797080 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96A8C0E91D81D9F100797080 /* LaunchScreen.storyboard */; };
+		EDD8813B37568D83E0973C98 /* Pods_ios_swift_faceapi_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABC9B24BB9CA0FB45F203BD /* Pods_ios_swift_faceapi_sample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +44,7 @@
 		96A8C0EA1D81D9F100797080 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96A8C0EC1D81D9F100797080 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E6B7DCF33C7FD5F8EB7EE4C /* Pods-ios-swift-faceapi-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-swift-faceapi-sample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample.debug.xcconfig"; sourceTree = "<group>"; };
-		AF100BA1519AD0319FC88EAB /* libPods-ios-swift-faceapi-sample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios-swift-faceapi-sample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AABC9B24BB9CA0FB45F203BD /* Pods_ios_swift_faceapi_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_swift_faceapi_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83ED6396A42656A40CA679D0 /* libPods-ios-swift-faceapi-sample.a in Frameworks */,
+				EDD8813B37568D83E0973C98 /* Pods_ios_swift_faceapi_sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +62,7 @@
 		6E81A13CDEC0D218748D308D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AF100BA1519AD0319FC88EAB /* libPods-ios-swift-faceapi-sample.a */,
+				AABC9B24BB9CA0FB45F203BD /* Pods_ios_swift_faceapi_sample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -184,6 +184,7 @@
 				96A8C0D91D81D9F100797080 /* Sources */,
 				96A8C0DA1D81D9F100797080 /* Frameworks */,
 				96A8C0DB1D81D9F100797080 /* Resources */,
+				38960F5BF400F2762D2618C4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -241,6 +242,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		38960F5BF400F2762D2618C4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MSAL/MSAL.framework",
+				"${BUILT_PRODUCTS_DIR}/MSGraphSDK/MSGraphSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/MSGraphSDK-NXOAuth2Adapter/MSGraphSDK_NXOAuth2Adapter.framework",
+				"${BUILT_PRODUCTS_DIR}/NXOAuth2Client/NXOAuth2Client.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSAL.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSGraphSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSGraphSDK_NXOAuth2Adapter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NXOAuth2Client.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FFBA0EB15B4CB967A0BF4478 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
