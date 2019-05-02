@@ -26,7 +26,6 @@
 
 /* Begin PBXFileReference section */
 		3215642D1D267668AD70ABAD /* Pods-ios-swift-faceapi-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-swift-faceapi-sample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample.release.xcconfig"; sourceTree = "<group>"; };
-		966013981D81DA600066DB1D /* ios-swift-faceapi-sample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-swift-faceapi-sample-Bridging-Header.h"; sourceTree = "<group>"; };
 		966013A41D81DAA60066DB1D /* ApplicationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationConstants.swift; sourceTree = "<group>"; };
 		966013A61D81DABA0066DB1D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		966013A81D81DAF60066DB1D /* ViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+Alert.swift"; sourceTree = "<group>"; };
@@ -110,7 +109,6 @@
 		966013A01D81DA7D0066DB1D /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				966013981D81DA600066DB1D /* ios-swift-faceapi-sample-Bridging-Header.h */,
 				966013A41D81DAA60066DB1D /* ApplicationConstants.swift */,
 			);
 			name = Application;
@@ -253,8 +251,6 @@
 				"${PODS_ROOT}/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/MSAL/MSAL.framework",
 				"${BUILT_PRODUCTS_DIR}/MSGraphSDK/MSGraphSDK.framework",
-				"${BUILT_PRODUCTS_DIR}/MSGraphSDK-NXOAuth2Adapter/MSGraphSDK_NXOAuth2Adapter.framework",
-				"${BUILT_PRODUCTS_DIR}/NXOAuth2Client/NXOAuth2Client.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -262,8 +258,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSAL.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSGraphSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSGraphSDK_NXOAuth2Adapter.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NXOAuth2Client.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -417,7 +411,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.microsoft.ios-swift-faceapi-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ios-swift-faceapi-sample/ios-swift-faceapi-sample-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
@@ -434,7 +428,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.microsoft.ios-swift-faceapi-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ios-swift-faceapi-sample/ios-swift-faceapi-sample-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

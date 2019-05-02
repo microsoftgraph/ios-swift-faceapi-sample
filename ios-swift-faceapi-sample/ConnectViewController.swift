@@ -5,6 +5,7 @@
 
 import UIKit
 import MSAL
+import MSGraphSDK
 
 enum State
 {

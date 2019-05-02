@@ -4,6 +4,7 @@
  */
 
 import UIKit
+import MSGraphSDK
 
 enum GraphResult<T, E>
 {
