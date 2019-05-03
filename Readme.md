@@ -1,4 +1,4 @@
-#Microsoft Cognitive Services with Graph SDK Sample for iOS
+# Microsoft Cognitive Services with Graph SDK Sample for iOS
 
 This sample shows how to use both the [Microsoft Graph SDK for iOS](https://github.com/microsoftgraph/msgraph-sdk-ios) and the [Microsoft Cognitive Services Face API](https://www.microsoft.com/cognitive-services/en-us/face-api) in an iOS app. 
 The user can select a photo locally from the device or from a user profile stored in Microsoft Exchange or Outlook. The sample uses the Face API to detect and identify the person in the photo.
@@ -46,9 +46,9 @@ For this sample, scopes for Graph have been pre-defined for you.
    ```
 5. Run the sample. You'll be asked to connect/authenticate to a work account and you'll need to provide your Office 365 credentials. Once authenticated you'll be taken to the photo selector controller to select a person to identify and a photo to identify from. 
 
-##Code of Interest
+## Code of Interest
 
-#### Graph
+### Graph
 This sample contains two Microsoft Graph calls, both of which are in **Graph.swift** file under /Graph.
 
 1. Get user's directory
@@ -64,15 +64,16 @@ This sample contains two Microsoft Graph calls, both of which are in **Graph.swi
    
 2. Get user profile (photo value)
    ```swift
- func getPhotoValue(forUser upn: String, with completion: (result: GraphResult<UIImage, Error>) -> Void) {
+    func getPhotoValue(forUser upn: String, with completion: (result: GraphResult<UIImage, Error>) -> Void) {
         graphClient.users(upn).photoValue().downloadWithCompletion {
             (url: NSURL?, response: NSURLResponse?, error: NSError?) in
-       ...
-		}
- }
+      	...
+            }
+    }
    ```
+   
 
-#### Cognitive Services - Face API
+### Cognitive Services - Face API
 This sample shows the basics of using the Microsoft Cognitive Services Face API to detect and identify faces. For more information, please visit [Microsoft Face API](https://www.microsoft.com/cognitive-services/en-us/face-api/documentation/overview)
 
 The code for identifying faces from scratch and related functions are in the **FaceAPI.swift** file under /CognitiveServices and the **FaceApiTableViewController.swift** file under /Controllers.
