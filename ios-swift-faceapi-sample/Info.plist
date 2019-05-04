@@ -46,7 +46,6 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>msauth.com.microsoft.ios-swift-faceapi-sample</string>
-				<string>auth</string>
 			</array>
 		</dict>
 	</array>
