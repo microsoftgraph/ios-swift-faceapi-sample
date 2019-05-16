@@ -149,7 +149,9 @@ extension FaceApiTableViewController
                 print("Error adding a person - ", error)
                 self.alert(title: "Error", message: "Check log for more details")
                 self.isLoading = false
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
                 
                 break
             }
@@ -169,7 +171,9 @@ extension FaceApiTableViewController
                 print("Error uploading a face - ", error)
                 self.alert(title: "Error", message: "Check log for more details")
                 self.isLoading = false
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
                 break
             }    
         }
@@ -191,7 +195,9 @@ extension FaceApiTableViewController
                 print("Error posting to train - ", error)
                 self.alert(title: "Error", message: "Check log for more details")
                 self.isLoading = false
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
                 break
             }
         }
@@ -227,7 +233,9 @@ extension FaceApiTableViewController
                 print("Training incomplete or error - ", error)
                 self.alert(title: "Error", message: "Check log for more details")
                 self.isLoading = false
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
                 break
             }
         }
@@ -259,7 +267,10 @@ extension FaceApiTableViewController
                 print("DetectFaces error - ", error)
                 self.alert(title: "Error", message: "Check log for more details")
                 self.isLoading = false
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
                 break
             }
         }
@@ -292,7 +303,7 @@ extension FaceApiTableViewController
                             for face in faces {
                                 if face.faceId == faceId {
                                     let faceImage = self.cropFace(face: face, image: self.selectedPhoto)
-                                    let confidence = candidate["confidence"] as! String
+                                    let confidence = candidate["confidence"] as! CFNumber
                                     
                                     var outputString = "confidence: \(confidence)\n"
                                     outputString += "dimensions: \n";
@@ -317,7 +328,9 @@ extension FaceApiTableViewController
                 print("Identifying faces error - ", error)
                 self.alert(title: "Error", message: "Check log for more details")
                 self.isLoading = false
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
                 break
             }
         }

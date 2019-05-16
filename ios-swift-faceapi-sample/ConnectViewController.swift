@@ -55,7 +55,9 @@ class ConnectViewController: UIViewController
             if success {
                 MSGraphClient.setAuthenticationProvider(self.authenticationProvider)
                 self.setConnectButton(state: .ReadyToConnect)
-                self.performSegue(withIdentifier: "selectPhoto", sender: nil)
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "selectPhoto", sender: nil)
+                }
                 
                 return
             }
@@ -69,16 +71,18 @@ class ConnectViewController: UIViewController
     
     private func setConnectButton(state: State)
     {
-        switch state {
-        case .Connecting:
-            connectButton.isEnabled = false
-            connectButton.setTitle("Connecting", for: .normal)
-        case .ReadyToConnect:
-            connectButton.isEnabled = true
-            connectButton.setTitle("Start by connecting to Microsoft Graph", for: .normal)
-        case .Error:
-            connectButton.isEnabled = true
-            connectButton.setTitle("Connection failed. Retry.", for: .normal)
+        DispatchQueue.main.async {
+            switch state {
+            case .Connecting:
+                self.connectButton.isEnabled = false
+                self.connectButton.setTitle("Connecting", for: .normal)
+            case .ReadyToConnect:
+                self.connectButton.isEnabled = true
+                self.connectButton.setTitle("Start by connecting to Microsoft Graph", for: .normal)
+            case .Error:
+                self.connectButton.isEnabled = true
+                self.connectButton.setTitle("Connection failed. Retry.", for: .normal)
+            }
         }
     }
 }

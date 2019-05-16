@@ -92,7 +92,9 @@ class PhotoSelectorTableViewController: UITableViewController, PersonSelecting, 
     func select(person: Person)
     {
         selectedPerson = person
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func selectPhoto()
