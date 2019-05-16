@@ -16,7 +16,7 @@ class FaceAPI: NSObject
     // Create person group
     static func createPersonGroup(personGroupId: String, name: String, userData: String?, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
     {
-        let url = "https://api.projectoxford.ai/face/v1.0/persongroups/"
+        let url = "\(ApplicationConstants.faceApiEndpoint)/persongroups/"
         let urlWithParams = url + personGroupId
         
         var request = URLRequest(url: URL(string: urlWithParams)!)
@@ -60,7 +60,7 @@ class FaceAPI: NSObject
     // Create person
     static func createPerson(personName: String, userData: String?, personGroupId: String, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
     {
-        let url = "https://api.projectoxford.ai/face/v1.0/persongroups/\(personGroupId)/persons"
+        let url = "\(ApplicationConstants.faceApiEndpoint)/persongroups/\(personGroupId)/persons"
         var request = URLRequest(url: URL(string: url)!)
         
         request.httpMethod = "POST"
@@ -100,7 +100,7 @@ class FaceAPI: NSObject
     // Upload face
     static func uploadFace(faceImage: UIImage, personId: String, personGroupId: String, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
     {
-        let url = "https://api.projectoxford.ai/face/v1.0/persongroups/\(personGroupId)/persons/\(personId)/persistedFaces"
+        let url = "\(ApplicationConstants.faceApiEndpoint)/persongroups/\(personGroupId)/persons/\(personId)/persistedFaces"
         var request = URLRequest(url: URL(string: url)!)
         
         request.httpMethod = "POST"
@@ -134,7 +134,7 @@ class FaceAPI: NSObject
     // Post training
     static func trainPersonGroup(personGroupId: String, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
     {
-        let url = "https://api.projectoxford.ai/face/v1.0/persongroups/\(personGroupId)/train"
+        let url = "\(ApplicationConstants.faceApiEndpoint)/persongroups/\(personGroupId)/train"
         var request = URLRequest(url: URL(string: url)!)
         
         request.httpMethod = "POST"
@@ -168,7 +168,7 @@ class FaceAPI: NSObject
     // Get training status
     static func getTrainingStatus(personGroupId: String, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
     {
-        let url = "https://api.projectoxford.ai/face/v1.0/persongroups/\(personGroupId)/training"
+        let url = "\(ApplicationConstants.faceApiEndpoint)/persongroups/\(personGroupId)/training"
         var request = URLRequest(url: URL(string: url)!)
         
         request.httpMethod = "GET"
@@ -194,7 +194,7 @@ class FaceAPI: NSObject
     // Detect faces
     static func detectFaces(facesPhoto: UIImage, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
     {
-        let url = "https://api.projectoxford.ai/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false"
+        let url = "\(ApplicationConstants.faceApiEndpoint)/detect?returnFaceId=true&returnFaceLandmarks=false"
         var request = URLRequest(url: URL(string: url)!)
         
         request.httpMethod = "POST"
@@ -230,7 +230,7 @@ class FaceAPI: NSObject
     // Identify faces in people group
     static func identify(faces faceIds: [String], personGroupId: String, completion: @escaping (_ result: FaceAPIResult<JSON, Error>) -> Void)
     {
-        let url = "https://api.projectoxford.ai/face/v1.0/identify"
+        let url = "\(ApplicationConstants.faceApiEndpoint)/identify"
         var request = URLRequest(url: URL(string: url)!)
         
         request.httpMethod = "POST"

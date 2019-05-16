@@ -14,6 +14,7 @@ struct ApplicationConstants
     
     // Cognitive services information
     static let ocpApimSubscriptionKey = "ENTER_SUBSCRIPTION_KEY"
+    static let faceApiEndpoint = "https://eastus.api.cognitive.microsoft.com/face/v1.0"
 }
 
 enum ErrorType: Error
