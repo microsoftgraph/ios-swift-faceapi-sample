@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		83ED6396A42656A40CA679D0 /* libPods-ios-swift-faceapi-sample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF100BA1519AD0319FC88EAB /* libPods-ios-swift-faceapi-sample.a */; };
 		966013A51D81DAA60066DB1D /* ApplicationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013A41D81DAA60066DB1D /* ApplicationConstants.swift */; };
 		966013A71D81DABA0066DB1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 966013A61D81DABA0066DB1D /* Main.storyboard */; };
 		966013AD1D81DAF60066DB1D /* ViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013A81D81DAF60066DB1D /* ViewController+Alert.swift */; };
@@ -15,18 +14,19 @@
 		966013AF1D81DAF60066DB1D /* PhotoSelectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013AA1D81DAF60066DB1D /* PhotoSelectorTableViewController.swift */; };
 		966013B01D81DAF60066DB1D /* SelectPersonTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013AB1D81DAF60066DB1D /* SelectPersonTableViewController.swift */; };
 		966013B11D81DAF60066DB1D /* FaceApiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013AC1D81DAF60066DB1D /* FaceApiTableViewController.swift */; };
-		966013B41D81DAFB0066DB1D /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013B21D81DAFB0066DB1D /* Authentication.swift */; };
+		966013B41D81DAFB0066DB1D /* AuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013B21D81DAFB0066DB1D /* AuthenticationProvider.swift */; };
 		966013B51D81DAFB0066DB1D /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013B31D81DAFB0066DB1D /* Graph.swift */; };
 		966013B71D81DAFF0066DB1D /* FaceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966013B61D81DAFF0066DB1D /* FaceAPI.swift */; };
 		966013B91D81DB280066DB1D /* Readme.md in Sources */ = {isa = PBXBuildFile; fileRef = 966013B81D81DB280066DB1D /* Readme.md */; };
 		96A8C0E11D81D9F100797080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A8C0E01D81D9F100797080 /* AppDelegate.swift */; };
 		96A8C0E81D81D9F100797080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96A8C0E71D81D9F100797080 /* Assets.xcassets */; };
 		96A8C0EB1D81D9F100797080 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96A8C0E91D81D9F100797080 /* LaunchScreen.storyboard */; };
+		EDD8813B37568D83E0973C98 /* Pods_ios_swift_faceapi_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABC9B24BB9CA0FB45F203BD /* Pods_ios_swift_faceapi_sample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		238BA008227BB14A00A5BACD /* ios-swift-faceapi-sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-swift-faceapi-sample.entitlements"; sourceTree = "<group>"; };
 		3215642D1D267668AD70ABAD /* Pods-ios-swift-faceapi-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-swift-faceapi-sample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample.release.xcconfig"; sourceTree = "<group>"; };
-		966013981D81DA600066DB1D /* ios-swift-faceapi-sample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-swift-faceapi-sample-Bridging-Header.h"; sourceTree = "<group>"; };
 		966013A41D81DAA60066DB1D /* ApplicationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationConstants.swift; sourceTree = "<group>"; };
 		966013A61D81DABA0066DB1D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		966013A81D81DAF60066DB1D /* ViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+Alert.swift"; sourceTree = "<group>"; };
@@ -34,7 +34,7 @@
 		966013AA1D81DAF60066DB1D /* PhotoSelectorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectorTableViewController.swift; sourceTree = "<group>"; };
 		966013AB1D81DAF60066DB1D /* SelectPersonTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPersonTableViewController.swift; sourceTree = "<group>"; };
 		966013AC1D81DAF60066DB1D /* FaceApiTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceApiTableViewController.swift; sourceTree = "<group>"; };
-		966013B21D81DAFB0066DB1D /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		966013B21D81DAFB0066DB1D /* AuthenticationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
 		966013B31D81DAFB0066DB1D /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		966013B61D81DAFF0066DB1D /* FaceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceAPI.swift; sourceTree = "<group>"; };
 		966013B81D81DB280066DB1D /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
@@ -44,7 +44,7 @@
 		96A8C0EA1D81D9F100797080 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96A8C0EC1D81D9F100797080 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E6B7DCF33C7FD5F8EB7EE4C /* Pods-ios-swift-faceapi-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-swift-faceapi-sample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample.debug.xcconfig"; sourceTree = "<group>"; };
-		AF100BA1519AD0319FC88EAB /* libPods-ios-swift-faceapi-sample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios-swift-faceapi-sample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AABC9B24BB9CA0FB45F203BD /* Pods_ios_swift_faceapi_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_swift_faceapi_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83ED6396A42656A40CA679D0 /* libPods-ios-swift-faceapi-sample.a in Frameworks */,
+				EDD8813B37568D83E0973C98 /* Pods_ios_swift_faceapi_sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +62,7 @@
 		6E81A13CDEC0D218748D308D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AF100BA1519AD0319FC88EAB /* libPods-ios-swift-faceapi-sample.a */,
+				AABC9B24BB9CA0FB45F203BD /* Pods_ios_swift_faceapi_sample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -110,7 +110,6 @@
 		966013A01D81DA7D0066DB1D /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				966013981D81DA600066DB1D /* ios-swift-faceapi-sample-Bridging-Header.h */,
 				966013A41D81DAA60066DB1D /* ApplicationConstants.swift */,
 			);
 			name = Application;
@@ -119,7 +118,7 @@
 		966013A11D81DA970066DB1D /* Graph */ = {
 			isa = PBXGroup;
 			children = (
-				966013B21D81DAFB0066DB1D /* Authentication.swift */,
+				966013B21D81DAFB0066DB1D /* AuthenticationProvider.swift */,
 				966013B31D81DAFB0066DB1D /* Graph.swift */,
 			);
 			name = Graph;
@@ -155,6 +154,7 @@
 		96A8C0DF1D81D9F100797080 /* ios-swift-faceapi-sample */ = {
 			isa = PBXGroup;
 			children = (
+				238BA008227BB14A00A5BACD /* ios-swift-faceapi-sample.entitlements */,
 				966013A01D81DA7D0066DB1D /* Application */,
 				9660139F1D81DA790066DB1D /* Resources */,
 				9660139E1D81DA770066DB1D /* Views */,
@@ -184,8 +184,7 @@
 				96A8C0D91D81D9F100797080 /* Sources */,
 				96A8C0DA1D81D9F100797080 /* Frameworks */,
 				96A8C0DB1D81D9F100797080 /* Resources */,
-				4DCFF5F4E7A54846F34E63DE /* [CP] Embed Pods Frameworks */,
-				5A5C2E078F30A28C2EFDD1ED /* [CP] Copy Pods Resources */,
+				38960F5BF400F2762D2618C4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -203,11 +202,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Microsoft;
 				TargetAttributes = {
 					96A8C0DC1D81D9F100797080 = {
 						CreatedOnToolsVersion = 7.3.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -243,34 +247,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4DCFF5F4E7A54846F34E63DE /* [CP] Embed Pods Frameworks */ = {
+		38960F5BF400F2762D2618C4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MSAL/MSAL.framework",
+				"${BUILT_PRODUCTS_DIR}/MSGraphSDK/MSGraphSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSAL.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSGraphSDK.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5A5C2E078F30A28C2EFDD1ED /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-swift-faceapi-sample/Pods-ios-swift-faceapi-sample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FFBA0EB15B4CB967A0BF4478 /* [CP] Check Pods Manifest.lock */ = {
@@ -279,13 +277,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ios-swift-faceapi-sample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -305,7 +306,7 @@
 				966013A51D81DAA60066DB1D /* ApplicationConstants.swift in Sources */,
 				966013B51D81DAFB0066DB1D /* Graph.swift in Sources */,
 				966013AE1D81DAF60066DB1D /* ConnectViewController.swift in Sources */,
-				966013B41D81DAFB0066DB1D /* Authentication.swift in Sources */,
+				966013B41D81DAFB0066DB1D /* AuthenticationProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,13 +333,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -377,13 +388,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -402,6 +423,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -412,13 +434,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "ios-swift-faceapi-sample/ios-swift-faceapi-sample.entitlements";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "ios-swift-faceapi-sample/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.microsoft.ios-swift-faceapi-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ios-swift-faceapi-sample/ios-swift-faceapi-sample-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -428,12 +453,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "ios-swift-faceapi-sample/ios-swift-faceapi-sample.entitlements";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "ios-swift-faceapi-sample/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.microsoft.ios-swift-faceapi-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ios-swift-faceapi-sample/ios-swift-faceapi-sample-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
