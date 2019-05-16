@@ -44,7 +44,9 @@ The sample code shows how to do the following:
     ```
 
 1. Open **ios-swift-faceAPIs-with-Graph.xcworkspace**.
-1. Open the **Application/ApplicationConstants.swift** file. Replace `YOUR CLIENT ID` with the application ID of your app registration. Replace `ENTER_SUBSCRIPTION_KEY` with your Face API key.
+1. Open the **Application/ApplicationConstants.swift** file. Replace `YOUR CLIENT ID` with the application ID of your app registration.
+1. Replace `ENTER_SUBSCRIPTION_KEY` with your Face API key.
+1. Replace `YOUR_FACE_API_ENDPOINT` with the endpoint for your Face API cognitive service. See the [Azure documentation](https://docs.microsoft.com/azure/cognitive-services/face/quickstarts/curl#face-endpoint-url) for details.
 1. Run the sample. You'll be asked to connect/authenticate to a work account and you'll need to provide your Office 365 credentials. Once authenticated you'll be taken to the photo selector controller to select a person to identify and a photo to identify from.
 
 ## Code of Interest
