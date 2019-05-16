@@ -1,4 +1,4 @@
-#Microsoft Cognitive Services with Graph SDK Sample for iOS
+# Microsoft Cognitive Services with Graph SDK Sample for iOS
 
 This sample shows how to use both the [Microsoft Graph SDK for iOS](https://github.com/microsoftgraph/msgraph-sdk-ios) and the [Microsoft Cognitive Services Face API](https://www.microsoft.com/cognitive-services/en-us/face-api) in an iOS app.
 The user can select a photo locally from the device or from a user profile stored in Microsoft Exchange or Outlook. The sample uses the Face API to detect and identify the person in the photo.
