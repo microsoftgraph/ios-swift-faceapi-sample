@@ -1,3 +1,21 @@
+---
+page_type: sample
+products:
+- office-365
+- ms-graph
+languages:
+- swift
+extensions:
+  contentType: samples
+  technologies:
+  - Microsoft Graph
+  services:
+  - Office 365
+  - Users
+  platforms:
+  - iOS
+  createdDate: 9/8/2016 11:27:52 AM
+---
 # Microsoft Cognitive Services with Graph SDK Sample for iOS
 
 This sample shows how to use both the [Microsoft Graph SDK for iOS](https://github.com/microsoftgraph/msgraph-sdk-ios) and the [Microsoft Cognitive Services Face API](https://www.microsoft.com/cognitive-services/en-us/face-api) in an iOS app.
