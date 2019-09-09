@@ -6,7 +6,7 @@ products:
 languages:
 - swift
 extensions:
-  contentType: samples
+  contentType: samples 
   technologies:
   - Microsoft Graph
   services:
